@@ -5,7 +5,10 @@ version: 1.0.0+1
 environment:
   sdk: ^3.7.2
 
+# thêm thư viện
 dependencies:
+  font_awesome_flutter: ^10.8.0
+  
   flutter:
     sdk: flutter
 
@@ -18,3 +21,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: edu
+      fonts: 
+        - asset: assets/fonts/edu.ttf
+    
+    - family: kapa
+      fonts: 
+        - asset: assets/fonts/kapa.ttf
+
+  # định nghĩa đường dẫn load hình
+  assets: 
+    - assets/imgs/

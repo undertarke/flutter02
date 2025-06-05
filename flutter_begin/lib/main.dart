@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart'; // nhúng thư viện flutter để xài Widget
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // nhúng thư viện flutter để xài Widget
 
 // 2 style
 // material => android
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart'; // nhúng thư viện flutter để xài
 
 // widget template => MaterialApp
 // widget Scaffold => giao điện dev
+
 // widget SafeArea => cách trên và dưới 1 khoảng với taskbar thiết bị
 
 // alt + shift + F
@@ -28,21 +30,112 @@ class WidgetRoot extends StatelessWidget {
   }
 }
 
-// buổi 11
-
+// buổi 12
+// widget layout
 class MyWidget extends StatelessWidget {
   const MyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(20),
-      
+    return Container(
+      width: 300,
+      height: 400,
       color: Colors.red,
-      child: Text("Hello !!!!", style: TextStyle(fontSize: 50)),
+      child: Column(
+        // mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center ,
+        children: [
+          Card(
+            color: Colors.amber,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text('card 1'),
+            ),
+          ),
+          Card(
+            color: Colors.amber,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text('card 2'),
+            ),
+          ),
+          Card(
+            color: Colors.amber,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text('card 3'),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
+
+// Icon
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Icon( FontAwesomeIcons.facebook , size: 200,color: Colors.red,);
+//   }
+// }
+
+// avatar
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ClipRRect(
+//       borderRadius: BorderRadius.circular(100),
+//       child: Image.asset(
+//         "assets/imgs/cat.jpg",
+//         width: 200,
+//       ),
+//     );
+//   }
+// }
+
+// cách lấy font
+// widget Image
+// jpg jpeg, png, gif
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Image.asset(
+//       "assets/imgs/cat.jpg",
+//       width: 400,
+//       height: 300,
+//       fit: BoxFit.fill,
+//       errorBuilder: (context, error, stackTrace) {
+//         return Image.asset("assets/imgs/not.png");
+//       },
+//     );
+//   }
+// }
+
+// buổi 11
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Card(
+//       margin: EdgeInsets.all(20),
+//       color: Colors.red,
+
+//       child: Padding(
+//         padding: EdgeInsets.all(50),
+//         child: Text("Hello !!!!", style: TextStyle(fontSize: 50)),
+//       ),
+//     );
+//   }
+// }
 
 // margin , padding
 
