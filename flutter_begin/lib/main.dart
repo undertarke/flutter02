@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_begin/bai_tap_column.dart';
+import 'package:flutter_begin/bai_tap_mot.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // nhúng thư viện flutter để xài Widget
 
 // 2 style
@@ -25,53 +27,117 @@ class WidgetRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(backgroundColor: null, body: SafeArea(child: MyWidget())),
+      home: Scaffold(backgroundColor: null, body: SafeArea(child: BaiTapMot())),
     );
   }
 }
 
-// buổi 12
-// widget layout
+//buổi 13
+
+// expand
 class MyWidget extends StatelessWidget {
   const MyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 400,
-      color: Colors.red,
-      child: Column(
-        // mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center ,
-        children: [
-          Card(
-            color: Colors.amber,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text('card 1'),
-            ),
-          ),
-          Card(
-            color: Colors.amber,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text('card 2'),
-            ),
-          ),
-          Card(
-            color: Colors.amber,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text('card 3'),
-            ),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Expanded(flex: 1, child: Container(color: Colors.yellow)),
+        SizedBox(height: 10),
+        Expanded(flex: 3, child: Container(color: Colors.red)),
+        SizedBox(height: 10),
+
+        Expanded(flex: 3, child: Container(color: Colors.yellow)),
+      ],
     );
   }
 }
+
+// row
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 400,
+//       height: 300,
+//       color: Colors.red,
+//       child: Row(
+//         // mainAxisSize: MainAxisSize.max,
+//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//         // crossAxisAlignment: CrossAxisAlignment.stretch,
+//         children: [
+
+//           Card(
+//             color: Colors.amber,
+//             child: Padding(
+//               padding: const EdgeInsets.all(10),
+//               child: Text('card 1'),
+//             ),
+//           ),
+//           Card(
+//             color: Colors.amber,
+//             child: Padding(
+//               padding: const EdgeInsets.all(10),
+//               child: Text('card 2'),
+//             ),
+//           ),
+//           Card(
+//             color: Colors.amber,
+//             child: Padding(
+//               padding: const EdgeInsets.all(10),
+//               child: Text('card 3'),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// buổi 12
+// widget layout: column
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 300,
+//       height: 400,
+//       color: Colors.red,
+//       child: Column(
+//         // mainAxisSize: MainAxisSize.max,
+//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//         crossAxisAlignment: CrossAxisAlignment.center ,
+//         children: [
+//           Card(
+//             color: Colors.amber,
+//             child: Padding(
+//               padding: const EdgeInsets.all(10),
+//               child: Text('card 1'),
+//             ),
+//           ),
+//           Card(
+//             color: Colors.amber,
+//             child: Padding(
+//               padding: const EdgeInsets.all(10),
+//               child: Text('card 2'),
+//             ),
+//           ),
+//           Card(
+//             color: Colors.amber,
+//             child: Padding(
+//               padding: const EdgeInsets.all(10),
+//               child: Text('card 3'),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // Icon
 // class MyWidget extends StatelessWidget {
