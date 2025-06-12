@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_begin/bai_tap_ba.dart';
+import 'package:flutter_begin/bai_tap_bon.dart';
 import 'package:flutter_begin/bai_tap_column.dart';
+import 'package:flutter_begin/bai_tap_hai.dart';
 import 'package:flutter_begin/bai_tap_mot.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // nhúng thư viện flutter để xài Widget
 
@@ -27,7 +30,7 @@ class WidgetRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(backgroundColor: null, body: SafeArea(child: BaiTapMot())),
+      home: Scaffold(backgroundColor: null, body: SafeArea(child: BaiTapBon())),
     );
   }
 }
