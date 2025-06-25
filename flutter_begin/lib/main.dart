@@ -4,6 +4,8 @@ import 'package:flutter_begin/bai_tap_bon.dart';
 import 'package:flutter_begin/bai_tap_column.dart';
 import 'package:flutter_begin/bai_tap_hai.dart';
 import 'package:flutter_begin/bai_tap_mot.dart';
+import 'package:flutter_begin/bai_tap_nam.dart';
+import 'package:flutter_begin/bai_tap_sau.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // nhúng thư viện flutter để xài Widget
 
 // 2 style
@@ -30,7 +32,31 @@ class WidgetRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(backgroundColor: null, body: SafeArea(child: BaiTapBon())),
+      home: Scaffold(backgroundColor: null, body: SafeArea(child: BaiTapSau())),
+    );
+  }
+}
+
+// buổi 15
+
+// Stack widget
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(width: 300, height: 300, color: Colors.red),
+
+        Positioned(
+          top: 100 ,
+          left:100 ,
+          // right: ,
+          // bottom: 10 ,
+          child: Container(width: 100, height: 100, color: Colors.blue),
+        ),
+      ],
     );
   }
 }
@@ -38,23 +64,23 @@ class WidgetRoot extends StatelessWidget {
 //buổi 13
 
 // expand
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(flex: 1, child: Container(color: Colors.yellow)),
-        SizedBox(height: 10),
-        Expanded(flex: 3, child: Container(color: Colors.red)),
-        SizedBox(height: 10),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Expanded(flex: 1, child: Container(color: Colors.yellow)),
+//         SizedBox(height: 10),
+//         Expanded(flex: 3, child: Container(color: Colors.red)),
+//         SizedBox(height: 10),
 
-        Expanded(flex: 3, child: Container(color: Colors.yellow)),
-      ],
-    );
-  }
-}
+//         Expanded(flex: 3, child: Container(color: Colors.yellow)),
+//       ],
+//     );
+//   }
+// }
 
 // row
 // class MyWidget extends StatelessWidget {
