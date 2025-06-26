@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_scrollview/bai_tap_ba.dart';
+import 'package:flutter_scrollview/bai_tap_bon.dart';
 import 'package:flutter_scrollview/bai_tap_hai.dart';
 import 'package:flutter_scrollview/bai_tap_mot.dart';
 
@@ -15,39 +16,147 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: SafeArea(child: MyWidget())),
+      home: Scaffold(
+        appBar: AppBar(title: Text("Appbar scaffold !!!")),
+        body: SafeArea(child: MyWidget()),
+      ),
     );
   }
 }
 
-// buoi 17
-// tiktok, PageView()
+// buoi 18
 
 class MyWidget extends StatelessWidget {
   const MyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      scrollDirection: Axis.vertical,
-      children: [
-       
-        Image.network(
-          "https://picsum.photos/200/200?random=2",
-          fit: BoxFit.fill,
-          width: 400,
-          height: 400,
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          // title: Text("Đây là tiêu đề"),
+          leading: Icon(Icons.arrow_back),
+          actions: [Icon(Icons.settings), Icon(Icons.list)],
+          expandedHeight: 300,
+          collapsedHeight: 100,
+          floating: true,
+          pinned: true,
+          flexibleSpace: FlexibleSpaceBar(
+            // centerTitle: true,
+            background: Image.network("https://picsum.photos/400/300?random=0"),
+            title: Text("title collapse"),
+          ),
         ),
-        Image.network("https://picsum.photos/300/300?random=2"),
-        Image.network("https://picsum.photos/300/300?random=2"),
-        Image.network("https://picsum.photos/300/300?random=2"),
-        Image.network("https://picsum.photos/300/300?random=2"),
-        Image.network("https://picsum.photos/300/300?random=2"),
-        Image.network("https://picsum.photos/300/300?random=2"),
+
+        SliverList(
+          delegate: SliverChildListDelegate([
+            Image.network("https://picsum.photos/300/300?random=2"),
+            Image.network("https://picsum.photos/300/300?random=2"),
+            Image.network("https://picsum.photos/300/300?random=2"),
+            Image.network("https://picsum.photos/300/300?random=2"),
+            Image.network("https://picsum.photos/300/300?random=2"),
+            Image.network("https://picsum.photos/300/300?random=2"),
+            Image.network("https://picsum.photos/300/300?random=2"),
+            Image.network("https://picsum.photos/300/300?random=2"),
+          ]),
+        ),
       ],
     );
   }
 }
+
+
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return CustomScrollView(
+//       slivers: [
+//         SliverToBoxAdapter(
+//           child: Column(
+//             children: [
+//               Text("dòng 1"),
+//               Text("dòng 2"),
+//               Text("dòng 3"),
+//               Text("dòng 4"),
+//             ],
+//           ),
+//         ),
+//         SliverToBoxAdapter(
+//           child: Container(
+//             height: 300,
+//             child: ListView(
+//               scrollDirection: Axis.horizontal,
+//               children: [
+//                 Image.network("https://picsum.photos/300/300?random=2"),
+//                 Image.network("https://picsum.photos/300/300?random=2"),
+//                 Image.network("https://picsum.photos/300/300?random=2"),
+//               ],
+//             ),
+//           ),
+//         ),
+//         SliverList(
+//           delegate: SliverChildListDelegate([
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//           ]),
+//         ),
+
+//         SliverGrid(
+//           delegate: SliverChildListDelegate([
+//             Image.network("https://picsum.photos/300/300?random=3"),
+//             Image.network("https://picsum.photos/300/300?random=3"),
+//             Image.network("https://picsum.photos/300/300?random=3"),
+//             Image.network("https://picsum.photos/300/300?random=3"),
+//           ]),
+//           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//             crossAxisCount: 3,
+//           ),
+//         ),
+
+//         SliverList(
+//           delegate: SliverChildBuilderDelegate(childCount: 10, (
+//             context,
+//             index,
+//           ) {
+//             return Text("data $index");
+//           }),
+//         ), // chèn một widget vào CustomScrollView
+//       ],
+//     );
+//   }
+// }
+
+// buoi 17
+// tiktok, PageView()
+
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return PageView(
+//       scrollDirection: Axis.vertical,
+//       children: [
+
+//         Image.network(
+//           "https://picsum.photos/200/200?random=2",
+//           fit: BoxFit.fill,
+//           width: 400,
+//           height: 400,
+//         ),
+//         Image.network("https://picsum.photos/300/300?random=2"),
+//         Image.network("https://picsum.photos/300/300?random=2"),
+//         Image.network("https://picsum.photos/300/300?random=2"),
+//         Image.network("https://picsum.photos/300/300?random=2"),
+//         Image.network("https://picsum.photos/300/300?random=2"),
+//         Image.network("https://picsum.photos/300/300?random=2"),
+//       ],
+//     );
+//   }
+// }
 
 // GridView.builder()
 // class MyWidget extends StatelessWidget {
@@ -334,3 +443,4 @@ class MyWidget extends StatelessWidget {
 //     );
 //   }
 // }
+
