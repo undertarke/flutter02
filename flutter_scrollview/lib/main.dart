@@ -3,6 +3,7 @@ import 'package:flutter_scrollview/bai_tap_ba.dart';
 import 'package:flutter_scrollview/bai_tap_bon.dart';
 import 'package:flutter_scrollview/bai_tap_hai.dart';
 import 'package:flutter_scrollview/bai_tap_mot.dart';
+import 'package:flutter_scrollview/bai_tap_nam.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,56 +15,112 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // setState()
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: Text("Appbar scaffold !!!")),
+        backgroundColor: Colors.grey,
+        // appBar: AppBar(title: Text("Appbar scaffold !!!")),
         body: SafeArea(child: MyWidget()),
       ),
     );
   }
 }
 
-// buoi 18
+// buoi 19
 
-class MyWidget extends StatelessWidget {
+// snippet:
+// stateless : STL
+// statefull : STF
+class MyWidget extends StatefulWidget {
   const MyWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          // title: Text("Đây là tiêu đề"),
-          leading: Icon(Icons.arrow_back),
-          actions: [Icon(Icons.settings), Icon(Icons.list)],
-          expandedHeight: 300,
-          collapsedHeight: 100,
-          floating: true,
-          pinned: true,
-          flexibleSpace: FlexibleSpaceBar(
-            // centerTitle: true,
-            background: Image.network("https://picsum.photos/400/300?random=0"),
-            title: Text("title collapse"),
-          ),
-        ),
+  State<MyWidget> createState() => _MyWidgetState();
+}
 
-        SliverList(
-          delegate: SliverChildListDelegate([
-            Image.network("https://picsum.photos/300/300?random=2"),
-            Image.network("https://picsum.photos/300/300?random=2"),
-            Image.network("https://picsum.photos/300/300?random=2"),
-            Image.network("https://picsum.photos/300/300?random=2"),
-            Image.network("https://picsum.photos/300/300?random=2"),
-            Image.network("https://picsum.photos/300/300?random=2"),
-            Image.network("https://picsum.photos/300/300?random=2"),
-            Image.network("https://picsum.photos/300/300?random=2"),
-          ]),
+class _MyWidgetState extends State<MyWidget> {
+  var title = "Hello world !!";
+
+  @override
+  Widget build(BuildContext context) {
+    print(title);
+
+    return Column(
+      children: [
+        Text("$title", style: TextStyle(fontSize: 50)),
+        ListTile(
+          title: Text("Bấm"),
+          onTap: () {
+            title = "Mentor trừ lương";
+            setState(() {}); // rebuild => load lại hàm build
+            print(title);
+          },
         ),
       ],
     );
   }
 }
+
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Text("Hello world !!", style: TextStyle(fontSize: 50)),
+//         ListTile(
+//           title: Text("Bấm"),
+//           onTap: () {
+//             print("bấm nè nè");
+//           },
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+// buoi 18
+
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return CustomScrollView(
+//       slivers: [
+//         SliverAppBar(
+//           // title: Text("Đây là tiêu đề"),
+//           leading: Icon(Icons.arrow_back),
+//           actions: [Icon(Icons.settings), Icon(Icons.list)],
+//           expandedHeight: 300,
+//           collapsedHeight: 100,
+//           floating: true,
+//           pinned: true,
+//           flexibleSpace: FlexibleSpaceBar(
+//             // centerTitle: true,
+//             background: Image.network("https://picsum.photos/400/300?random=0"),
+//             title: Text("title collapse"),
+//           ),
+//         ),
+
+//         SliverList(
+//           delegate: SliverChildListDelegate([
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//             Image.network("https://picsum.photos/300/300?random=2"),
+//           ]),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 
 // class MyWidget extends StatelessWidget {
