@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.grey,
         // appBar: AppBar(title: Text("Appbar scaffold !!!")),
-        body: SafeArea(child: MyWidget()),
+        body: SafeArea(child: BaiTapNam()),
       ),
     );
   }

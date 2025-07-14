@@ -446,7 +446,7 @@ class BaiTapNam extends StatelessWidget {
                   ],
                 ),
               ),
-              Image.network("https://picsum.photos/500"),
+              Image.network("https://airbnbnew.cybersoft.edu.vn/IMAGES/vt2.jpg"),
             ],
           ),
         ),

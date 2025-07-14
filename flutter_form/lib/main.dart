@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form/bai_tap_hai.dart';
 import 'package:flutter_form/bai_tap_mot.dart';
 
 void main() {
@@ -14,10 +15,220 @@ class MyApp extends StatelessWidget {
     // setState()
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: SafeArea(child: BaiTapMot())),
+      home: Scaffold(
+        // backgroundColor: Colors.black,
+        body: SafeArea(child: MyWidget()),
+      ),
     );
   }
 }
+
+// buoi 22
+// Form
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  final _formKey = GlobalKey<FormState>();
+
+  var hoTen = "";
+  var email = "";
+  var ghiChu = "";
+  var phuongXa;
+  var listPhuongXa = [
+    {"id": 1, "label": "Sài Gòn"},
+    {"id": 2, "label": "Tân Định"},
+    {"id": 3, "label": "Diên Hồng"},
+    {"id": 4, "label": "Hòa Hưng"},
+    {"id": 5, "label": "Hòa Bình"},
+    {"id": 6, "label": "Phú Thọ"},
+    {"id": 7, "label": "Bình Thới"},
+    {"id": 8, "label": "Minh Phụng"},
+    {"id": 9, "label": "Xóm Chiếu"},
+    {"id": 10, "label": "Tân Tạo"},
+    {"id": 11, "label": "Bình Trị Đông"},
+    {"id": 12, "label": "Bình Hưng Hòa"},
+    {"id": 13, "label": "Hiệp Bình"},
+    {"id": 14, "label": "Tam Bình"},
+    {"id": 15, "label": "Thủ Đức"},
+    {"id": 16, "label": "Linh Xuân"},
+    {"id": 17, "label": "Bình Hưng"},
+    {"id": 18, "label": "Bình Khánh"},
+    {"id": 19, "label": "An Thới Đông"},
+    {"id": 20, "label": "Cần Giờ"},
+    {"id": 21, "label": "Tân Kiên"},
+    {"id": 22, "label": "An Phú Đông"},
+    {"id": 23, "label": "Tân Thới Hiệp"},
+    {"id": 24, "label": "Thới An"},
+    {"id": 25, "label": "Tân Vĩnh Lộc"},
+    {"id": 26, "label": "Bình Lợi"},
+    {"id": 27, "label": "Tân Nhựt"},
+    {"id": 28, "label": "Bình Chánh"},
+    {"id": 29, "label": "Hưng Long"},
+    {"id": 30, "label": "An Nhơn Tây"},
+  ];
+  var gioiTinh = 0;
+  var dongY = false;
+  var thongTin = {};
+
+  onSubmit() {
+    setState(() {
+      thongTin = {
+        "hoTen": hoTen,
+        "email": email,
+        "ghiChu": ghiChu,
+        "phuongXa": phuongXa,
+        "gioiTinh": gioiTinh,
+        "dongY": dongY,
+      };
+    });
+
+    print(thongTin);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView(
+          children: [
+            TextFormField(
+              initialValue: "$hoTen",
+              decoration: InputDecoration(
+                labelText: "Họ và tên",
+                hintText: "Hãy nhập họ và tên của bạn...", // placeholder
+                prefixIcon: Icon(Icons.home),
+                suffixIcon: Icon(Icons.access_alarm),
+                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.red,
+              ),
+
+              // gửi dữ liệu cho Form
+              onSaved: (newValue) {},
+
+              onChanged: (value) {
+                hoTen = value;
+                print(hoTen);
+              },
+
+              // submit khi enter
+              onFieldSubmitted: (value) {
+                print(value);
+                // gửi dữ liệu đi
+              },
+              style: TextStyle(color: Colors.yellow),
+              maxLength: 50,
+            ),
+
+            TextFormField(
+              onChanged: (value) {
+                email = value;
+              },
+
+              decoration: InputDecoration(labelText: "Email"),
+            ),
+
+            TextFormField(
+              onChanged: (value) {
+                ghiChu = value;
+              },
+              maxLines: 3, // TextArea
+              decoration: InputDecoration(labelText: "Ghi chú"),
+            ),
+
+            DropdownButtonFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Phường & Xã",
+              ),
+              items:
+                  listPhuongXa.map((item) {
+                    return DropdownMenuItem(
+                      value: item['id'],
+                      child: Text("${item['label']}"),
+                    );
+                  }).toList(),
+
+              onChanged: (value) {
+                phuongXa = value;
+              },
+            ),
+
+            RadioListTile(
+              title: Text("Nam"),
+              value: 0,
+              groupValue: gioiTinh,
+              onChanged: (value) {
+                setState(() {
+                  gioiTinh = value!;
+                });
+              },
+            ),
+            RadioListTile(
+              title: Text("Nữ"),
+              value: 1,
+              groupValue: gioiTinh,
+              onChanged: (value) {
+                setState(() {
+                  gioiTinh = value!;
+                });
+              },
+            ),
+            RadioListTile(
+              title: Text("Khác"),
+              value: 2,
+              groupValue: gioiTinh,
+              onChanged: (value) {
+                setState(() {
+                  gioiTinh = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              value: dongY,
+              onChanged: (value) {
+                setState(() {
+                  dongY = value!;
+                });
+              },
+              title: Text("Bạn có đồng ý điều khoản !!"),
+            ),
+
+            SwitchListTile(
+              value: dongY,
+              onChanged: (value) {
+                setState(() {
+                  dongY = value;
+                });
+              },
+            ),
+
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // gửi dữ liệu đi
+                onSubmit();
+              },
+              child: Text("Gửi dữ liệu (submit)"),
+            ),
+
+            Text("${thongTin}"),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 // buoi 20
 
