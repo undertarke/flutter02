@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form/bai_tap_hai.dart';
 import 'package:flutter_form/bai_tap_mot.dart';
 
@@ -34,7 +35,8 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   final _formKey = GlobalKey<FormState>();
-
+  var lstGiay=[];
+  
   var hoTen = "";
   var email = "";
   var ghiChu = "";
@@ -76,6 +78,14 @@ class _MyWidgetState extends State<MyWidget> {
   var thongTin = {};
 
   onSubmit() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    if (!dongY){
+      print("chưa đổng ý điều khoản");
+      return;
+    }
+
     setState(() {
       thongTin = {
         "hoTen": hoTen,
@@ -90,6 +100,20 @@ class _MyWidgetState extends State<MyWidget> {
     print(thongTin);
   }
 
+  bool isValidEmail(String email) {
+    // Biểu thức chính quy để kiểm tra email
+    final RegExp emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    return emailRegex.hasMatch(email);
+  }
+
+  bool isValidInteger(String value) {
+    // Regex kiểm tra số nguyên (chỉ chứa các chữ số 0-9, có thể có dấu - cho số âm)
+    final RegExp integerRegex = RegExp(r'^-?\d+$');
+    return integerRegex.hasMatch(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -99,6 +123,15 @@ class _MyWidgetState extends State<MyWidget> {
         child: ListView(
           children: [
             TextFormField(
+              validator: (value) {
+                // true
+                if (value == null ||
+                    value.isEmpty == true ||
+                    value.trim() == "") {
+                  return "Hãy nhập họ tên của bẹn !!!!";
+                }
+                return null;
+              },
               initialValue: "$hoTen",
               decoration: InputDecoration(
                 labelText: "Họ và tên",
@@ -106,8 +139,6 @@ class _MyWidgetState extends State<MyWidget> {
                 prefixIcon: Icon(Icons.home),
                 suffixIcon: Icon(Icons.access_alarm),
                 border: OutlineInputBorder(),
-                filled: true,
-                fillColor: Colors.red,
               ),
 
               // gửi dữ liệu cho Form
@@ -123,7 +154,7 @@ class _MyWidgetState extends State<MyWidget> {
                 print(value);
                 // gửi dữ liệu đi
               },
-              style: TextStyle(color: Colors.yellow),
+              style: TextStyle(color: Colors.black),
               maxLength: 50,
             ),
 
@@ -131,10 +162,40 @@ class _MyWidgetState extends State<MyWidget> {
               onChanged: (value) {
                 email = value;
               },
-
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Vui lòng nhập email';
+                }
+                if (!isValidEmail(value)) {
+                  return 'Email không hợp lệ';
+                }
+                return null;
+              },
               decoration: InputDecoration(labelText: "Email"),
             ),
+            TextFormField(
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(
+                  RegExp(r'^-?\d*'),
+                ), // Chỉ cho phép số và dấu trừ
+              ],
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Vui lòng nhập điện thoại';
+                }
+                if (!isValidInteger(value)) {
+                  return 'Điện thoại không hợp lệ';
+                }
 
+                if(value.length < 10){
+                  return "số điện thoại phải lớn hơn 10 số";
+                }
+                return null;
+              },
+              decoration: InputDecoration(labelText: "Điện thoại"),
+            ),
             TextFormField(
               onChanged: (value) {
                 ghiChu = value;
@@ -198,6 +259,7 @@ class _MyWidgetState extends State<MyWidget> {
                   dongY = value!;
                 });
               },
+              
               title: Text("Bạn có đồng ý điều khoản !!"),
             ),
 
