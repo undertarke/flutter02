@@ -29,6 +29,7 @@ class _UiDbState extends State<UiDb> {
         ElevatedButton(
           onPressed: () async {
             var ketQua = await getUsers();
+            print(ketQua);
           },
           child: Text("Lấy data table user"),
         ),

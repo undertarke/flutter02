@@ -5,7 +5,19 @@ Databasehelper databasehelper = Databasehelper();
 Future<dynamic> getUsers() async {
   final db = await databasehelper.database;
   final result = await db.query('users'); // đồng bộ
-  
+
+  return result;
+}
+
+Future<dynamic> getUserById(id) async {
+  final db = await databasehelper.database;
+  final result = await db.query(
+    'users',
+    where: " id = ? ",
+    whereArgs: [id],
+    
+  ); // đồng bộ
+
   return result;
 }
 

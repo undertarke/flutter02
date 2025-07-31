@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_endgame/db/ui_db.dart';
+import 'package:flutter_endgame/pages/bai_tap_sqlite.dart';
 import 'package:flutter_endgame/pages/page_a.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-
+      debugShowCheckedModeBanner: false,
       home: Home(),
     );
   }
@@ -36,8 +37,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var indexPage = 0;
-  var listPage = [HomePage(), PageA(),UiDb()];
+  var indexPage = 2;
+  var listPage = [HomePage(), PageA(), BaiTapSqlite(), UiDb()];
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.red,
         leading: Icon(Icons.home),
         title: Text("Home"),
-        actions: [Icon(Icons.settings), Icon(Icons.person)],
+        actions: [],
       ),
       body: listPage[indexPage],
 
@@ -64,7 +65,8 @@ class _HomeState extends State<Home> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.abc), label: "Page A"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Dev")
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "BT"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Dev"),
         ],
         currentIndex: indexPage,
       ),
@@ -77,11 +79,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text("Hello world!!"),
-       
-      ],
-    );
+    return Column(children: [Text("Hello world!!")]);
   }
 }
