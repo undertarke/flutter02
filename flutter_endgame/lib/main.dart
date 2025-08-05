@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_endgame/db/ui_db.dart';
 import 'package:flutter_endgame/pages/bai_tap_sqlite.dart';
 import 'package:flutter_endgame/pages/page_a.dart';
+import 'package:flutter_endgame/services/product_service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,7 +38,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var indexPage = 2;
+  var indexPage = 0;
   var listPage = [HomePage(), PageA(), BaiTapSqlite(), UiDb()];
 
   @override
@@ -74,11 +75,45 @@ class _HomeState extends State<Home> {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var listProduct = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getProduct().then((value) {
+      setState(() {
+        listProduct = value;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(children: [Text("Hello world!!")]);
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+      itemCount: listProduct.length,
+      itemBuilder: (context, index) {
+        var item = listProduct[index];
+        return Card(
+          child: Column(
+            children: [
+              Image.network(item["image"], fit: BoxFit.fill, width: 150),
+              Text("${item["name"]}"),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

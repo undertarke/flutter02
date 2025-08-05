@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_endgame/db/dao/user_dao.dart';
 import 'package:flutter_endgame/db/tables/user_table.dart';
+import 'package:flutter_endgame/services/product_service.dart';
 
 class UiDb extends StatefulWidget {
   const UiDb({super.key});
@@ -32,6 +33,14 @@ class _UiDbState extends State<UiDb> {
             print(ketQua);
           },
           child: Text("Lấy data table user"),
+        ),
+
+        ElevatedButton(
+          onPressed: () async {
+            await getGraphQL();
+            
+          },
+          child: Text("Gọi API product"),
         ),
       ],
     );
