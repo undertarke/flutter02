@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_endgame/db/ui_db.dart';
 import 'package:flutter_endgame/pages/bai_tap_sqlite.dart';
 import 'package:flutter_endgame/pages/page_a.dart';
+import 'package:flutter_endgame/pages/product_detail.dart';
 import 'package:flutter_endgame/services/product_service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       home: Home(),
+      routes: {"detail": (context) => ProductPage()},
     );
   }
 }
@@ -38,13 +40,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var indexPage = 0;
+  var indexPage = 1;
   var listPage = [HomePage(), PageA(), BaiTapSqlite(), UiDb()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        decoration: BoxDecoration(
+          color: Colors.blueGrey,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.home, color: Colors.white),
+        ),
+      ),
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         backgroundColor: Colors.red,
         leading: Icon(Icons.home),
@@ -65,7 +78,7 @@ class _HomeState extends State<Home> {
         selectedItemColor: Colors.yellow,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.abc), label: "Page A"),
+          BottomNavigationBarItem(icon: Icon(Icons.abc), label: "Chat"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "BT"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Dev"),
         ],
@@ -101,16 +114,35 @@ class _HomePageState extends State<HomePage> {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
+        childAspectRatio: 0.8,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
       ),
+
       itemCount: listProduct.length,
       itemBuilder: (context, index) {
         var item = listProduct[index];
         return Card(
-          child: Column(
-            children: [
-              Image.network(item["image"], fit: BoxFit.fill, width: 150),
-              Text("${item["name"]}"),
-            ],
+          child: TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, "detail",arguments: item["id"]);
+            },
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Image.network(item["image"], fit: BoxFit.fill, width: 150),
+                    Text("${item["id"]}-${item["name"]}"),
+                    Text("\$ ${item["price"]}"),
+                  ],
+                ),
+                Positioned(
+                  right: 10,
+                  top: 10,
+                  child: Icon(Icons.check_circle_rounded),
+                ),
+              ],
+            ),
           ),
         );
       },

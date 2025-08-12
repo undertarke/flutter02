@@ -53,3 +53,21 @@ Future<dynamic> getGraphQL() async {
     throw Exception("Lỗi: $exception");
   }
 }
+
+
+Future<dynamic> getProductDetail(productId) async {
+  try {
+    final url = Uri.parse("$DOMAIN/api/product/getid?id=$productId");
+
+    final response = await http.get(url); // gọi API với method
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+
+      return json["content"];
+    } else {
+      throw Exception('Lỗi kết nối API: ${response.statusCode}');
+    }
+  } catch (exception) {
+    throw Exception("Lỗi: $exception");
+  }
+}
