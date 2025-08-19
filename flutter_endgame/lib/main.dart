@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_endgame/bloc/counter_bloc.dart';
 import 'package:flutter_endgame/db/ui_db.dart';
 import 'package:flutter_endgame/pages/bai_tap_sqlite.dart';
+import 'package:flutter_endgame/pages/demo_state.dart';
+import 'package:flutter_endgame/pages/login.dart';
 import 'package:flutter_endgame/pages/page_a.dart';
 import 'package:flutter_endgame/pages/product_detail.dart';
+import 'package:flutter_endgame/provider/counter_model.dart';
 import 'package:flutter_endgame/services/product_service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    // MultiProvider(
+    //   providers: [
+    //     ChangeNotifierProvider(create: (context) => CounterModel()),
+
+    //     ChangeNotifierProvider(create: (context) => UserModel()),
+    //     ChangeNotifierProvider(create: (context) => ProductModel()),
+    //   ],
+    //   child: const MyApp(),
+    // ),
+    
+    MultiBlocProvider(
+      providers: [BlocProvider(create: (context) => CounterBloc())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -40,8 +61,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var indexPage = 1;
-  var listPage = [HomePage(), PageA(), BaiTapSqlite(), UiDb()];
+  var indexPage = 3;
+  var listPage = [
+    HomePage(),
+    PageA(),
+    LoginPage(),
+    DemoState(),
+    BaiTapSqlite(),
+    UiDb(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +107,8 @@ class _HomeState extends State<Home> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.abc), label: "Chat"),
+          BottomNavigationBarItem(icon: Icon(Icons.login), label: "Login"),
+          BottomNavigationBarItem(icon: Icon(Icons.star_rate), label: "State"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "BT"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Dev"),
         ],
@@ -125,7 +155,7 @@ class _HomePageState extends State<HomePage> {
         return Card(
           child: TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, "detail",arguments: item["id"]);
+              Navigator.pushNamed(context, "detail", arguments: item["id"]);
             },
             child: Stack(
               children: [

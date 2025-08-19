@@ -60,6 +60,14 @@ class _PageAState extends State<PageA> {
     // call data
    
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    // socket.off("send-message");
+    socket.disconnect();
+  }
 
   @override
   Widget build(BuildContext context) {
