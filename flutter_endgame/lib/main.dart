@@ -9,11 +9,15 @@ import 'package:flutter_endgame/pages/page_a.dart';
 import 'package:flutter_endgame/pages/product_detail.dart';
 import 'package:flutter_endgame/provider/counter_model.dart';
 import 'package:flutter_endgame/services/product_service.dart';
+import 'package:flutter_endgame/ultis/setup_notification.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
+
+  settingMain();
+
   runApp(
     // MultiProvider(
     //   providers: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_endgame/pages/demo_state.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 late IO.Socket socket; // socket client
@@ -36,7 +37,9 @@ class _PageAState extends State<PageA> {
 
     connectToSocket();
     socket.on("send-message", (data) {
-      print("đây là test !!!");
+
+      showNotification(data);
+
       setState(() {
         _messages.add(data.toString()); // ["","",""]
       });
